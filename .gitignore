@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+logs/
+cv-files/
+*.db
+.env
+node_modules/
+.angular/
+.next/
+dist/
+coverage/
+TestResults/

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\HireFlow.Domain\HireFlow.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Gives us PasswordHasher, the same hasher ASP.NET Identity uses. -->
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.*" />
+  </ItemGroup>
+</Project>

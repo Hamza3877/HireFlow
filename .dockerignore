@@ -1,0 +1,10 @@
+**/bin
+**/obj
+**/node_modules
+**/.angular
+**/.next
+.git
+.env
+cv-files
+logs
+*.db
