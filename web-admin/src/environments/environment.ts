@@ -1,4 +1,3 @@
-// Address of the HireFlow API. Change this to your live API address before deploying.
-export const environment = {
-  apiUrl: 'http://localhost:5000'
-};
+   export const environment = {
+     apiUrl: 'https://hireflow-api.runasp.net'
+   };
