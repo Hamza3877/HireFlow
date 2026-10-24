@@ -71,7 +71,7 @@ export class OffersComponent implements OnInit {
 
   // The link opens the Next.js careers site's offer page. Change the address when you deploy.
   copyLink(offer: Offer): void {
-    const link = `http://localhost:3000/offer/${offer.acceptToken}`;
+       const link = `https://hireflow-careers-fawn.vercel.app/offer/${offer.acceptToken}`;
     navigator.clipboard.writeText(link).then(() => this.toast.success('Link copied. Send it to the candidate.'));
   }
 }
