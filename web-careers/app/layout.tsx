@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
               <div>
                 <h4>Built with</h4>
-                <span>ASP.NET Core and SQL Server</span>
+                <span>ASP.NET Core Web API and SQL Server</span>
                 <span>Angular and Next.js</span>
               </div>
             </div>
