@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../core/api.service';
@@ -13,11 +13,11 @@ import { ToastService } from '../core/toast.service';
   standalone: true,
   imports: [FormsModule, DatePipe, RouterLink],
   template: `
-    <a routerLink="/pipeline">← Back to pipeline</a>
+    <a [routerLink]="backLink">← Back to {{ backLabel }}</a>
     @if (app) {
       <div class="row" style="align-items:center;margin:12px 0">
         <h1 style="margin:0">{{ app.candidateName }}</h1>
-        <span class="chip" [class]="'chip ' + app.stage" style="flex:0 0 auto">{{ app.stage }}</span>
+        <span class="chip" [class]="'chip ' + app.stage" style="flex:0 0 auto;min-width:0">{{ app.stage }}</span>
       </div>
 
       <div class="grid">
@@ -94,7 +94,7 @@ import { ToastService } from '../core/toast.service';
     }
   `
 })
-export class CandidateComponent implements OnInit {
+export class CandidateComponent implements OnInit, OnDestroy {
   private api = inject(ApiService);
   private toast = inject(ToastService);
   private route = inject(ActivatedRoute);
@@ -113,15 +113,27 @@ export class CandidateComponent implements OnInit {
   private get id(): number {
     return Number(this.route.snapshot.paramMap.get('id'));
   }
+get backLink(): string {
+  const from = this.route.snapshot.queryParamMap.get('from');
+  return from === 'interviews' ? '/interviews' : from === 'offers' ? '/offers' : '/pipeline';
+}
 
+get backLabel(): string {
+  const from = this.route.snapshot.queryParamMap.get('from');
+  return from === 'interviews' ? 'Interviews' : from === 'offers' ? 'Offers' : 'Pipeline';
+}
   get progress(): number {
     return this.tasks.length ? (this.tasks.filter(t => t.isDone).length / this.tasks.length) * 100 : 0;
   }
 
   ngOnInit(): void {
+document.body.dataset['section'] = this.route.snapshot.queryParamMap.get('from') ?? 'pipeline';
     this.reload();
     this.api.staff().subscribe(s => (this.staff = s));
   }
+ngOnDestroy(): void {
+  delete document.body.dataset['section'];
+}
 
   reload(): void {
     this.api.application(this.id).subscribe(a => {

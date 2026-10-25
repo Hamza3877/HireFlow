@@ -13,10 +13,7 @@ import { ToastService } from '../core/toast.service';
   imports: [FormsModule, DatePipe],
   template: `
         @if (showForm) {
-      <div style="margin-bottom:12px">
-        <button class="btn ghost" type="button" style="background:#fff;color:var(--primary);border-color:#c7d2fe;font-weight:600" (click)="showForm = false">← All jobs</button>
-      </div>
-      <h1 style="margin:0 0 12px">{{ editingId ? 'Edit job' : 'New job' }}</h1>
+           <h1 style="margin:0 0 12px">{{ editingId ? 'Edit job' : 'New job' }}</h1>
     } @else {
       <div class="row" style="align-items:center;margin-bottom:12px">
         <h1 style="margin:0">Jobs</h1>
@@ -68,7 +65,7 @@ import { ToastService } from '../core/toast.service';
             <tbody>
               @for (job of result.items; track job.id) {
                 <tr>
-                  <td><strong>{{ job.title }}</strong></td>
+                  <td>{{ job.title }}</td>
                   <td>{{ job.department }}</td>
                   <td>{{ job.location }}</td>
                   <td>{{ job.positions }}</td>
