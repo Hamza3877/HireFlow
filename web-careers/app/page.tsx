@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getOpenJobs } from '@/lib/api';
 
-const POPULAR = ['.NET', 'Angular', 'QA'];
+
 
 const paths = {
   bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7z" />,
@@ -37,7 +37,11 @@ const STAGES = ['Applied', 'Screening', 'Interview', 'Offer', 'Hired'];
 // Careers home: hero, search box and the list of open jobs (loaded on the server).
 export default async function Home({ searchParams }: { searchParams: { q?: string } }) {
   const search = searchParams.q?.trim() ?? '';
-  const jobs = await getOpenJobs(search);
+    const [jobs, all] = await Promise.all([getOpenJobs(search), search ? getOpenJobs('') : null]);
+  const base = all ?? jobs;
+  const departments = Array.from(new Set(base.items.map(j => j.department).filter(Boolean)));
+  const locations = new Set(base.items.map(j => j.location).filter(Boolean));
+  const openings = base.items.reduce((sum, j) => sum + j.positions, 0);
   const countLabel = `${jobs.totalCount} ${search ? 'matching' : 'open'} ${jobs.totalCount === 1 ? 'job' : 'jobs'}`;
 
   return (
@@ -53,22 +57,19 @@ export default async function Home({ searchParams }: { searchParams: { q?: strin
             <input name="q" defaultValue={search} placeholder="Search by title, department or city" aria-label="Search jobs" />
             <button type="submit">Search</button>
           </form>
-          <div className="hf-pop">
-            <em>Popular:</em>
-            {POPULAR.map(p => <Link key={p} href={`/?q=${encodeURIComponent(p)}`}>{p}</Link>)}
-          </div>
-          <div className="hf-proof">
-            <span><Icon n="bolt" />Instant skills match</span>
-            <span><Icon n="file" />CV upload as PDF</span>
-            <span><Icon n="bell" />Live status tracking</span>
-          </div>
-        </div>
+                    {departments.length > 0 && (
+            <div className="hf-pop">
+              <em>Departments:</em>
+              {departments.slice(0, 4).map(d => <Link key={d} href={`/?q=${encodeURIComponent(d)}`}>{d}</Link>)}
+            </div>
+          )}
+                </div>
       </section>
 
-      <div className="hf-stats">
-        <div className="hf-card hf-stat"><span className="hf-tile"><Icon n="brief" /></span><div><b>{jobs.totalCount}</b><span>{search ? 'Matching jobs' : 'Open jobs'}</span></div></div>
-        <div className="hf-card hf-stat"><span className="hf-tile"><Icon n="clock" /></span><div><b>2 min</b><span>To apply</span></div></div>
-        <div className="hf-card hf-stat"><span className="hf-tile"><Icon n="bell" /></span><div><b>Live</b><span>Status tracking</span></div></div>
+           <div className="hf-bar">
+        <div className="hf-bi"><span className="hf-tile"><Icon n="brief" /></span><div><b>{base.totalCount}</b><span>Open jobs</span></div></div>
+        <div className="hf-bi"><span className="hf-tile"><Icon n="check" /></span><div><b>{openings}</b><span>Open positions</span></div></div>
+        <div className="hf-bi"><span className="hf-tile"><Icon n="pin" /></span><div><b>{locations.size}</b><span>Locations</span></div></div>
       </div>
 
       <div className="hf-head" id="jobs">
