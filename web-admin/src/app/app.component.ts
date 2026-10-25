@@ -12,10 +12,10 @@ import { ToastService } from './core/toast.service';
     @if (auth.user(); as user) {
       <header class="topbar">
         <button class="menu" (click)="open = !open" aria-label="Open menu">☰</button>
-        <span class="brand">HireFlow</span>
+           <span class="brand">HireFlow<small>Staff</small></span>
         <span class="spacer"></span>
-        <span class="who">{{ user.fullName }} · {{ user.role }}</span>
-        <button class="btn ghost small" (click)="auth.logout()">Log out</button>
+               <span class="who">{{ user.fullName }}<span class="role">{{ user.role }}</span></span>
+                <button class="btn ghost logout" (click)="auth.logout()">Log out</button>
       </header>
       <div class="layout">
         <nav class="side" [class.open]="open" (click)="open = false">

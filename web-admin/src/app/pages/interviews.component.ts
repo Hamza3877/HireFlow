@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+   import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../core/api.service';
 import { AuthService } from '../core/auth.service';
 import { Interview } from '../core/models';
@@ -25,8 +25,8 @@ import { ToastService } from '../core/toast.service';
             <thead><tr><th>Candidate</th><th>Interviewer</th><th>When</th><th>Status</th><th>Scorecard</th><th></th></tr></thead>
             <tbody>
               @for (i of items; track i.id) {
-                <tr>
-                  <td><a [routerLink]="['/candidates', i.applicationId]">{{ i.candidateName }}</a></td>
+                <tr class="clickable" (click)="openCandidate(i.applicationId)">
+                  <td><a class="row-link" [routerLink]="['/candidates', i.applicationId]" [queryParams]="{ from: 'interviews' }" (click)="$event.stopPropagation()">{{ i.candidateName }}</a></td>
                   <td>{{ i.interviewerName }}</td>
                   <td>{{ i.startTime | date: 'medium' }}</td>
                   <td><span class="chip" [class]="'chip ' + i.status">{{ i.status }}</span></td>
@@ -68,6 +68,12 @@ export class InterviewsComponent implements OnInit {
   private api = inject(ApiService);
   private toast = inject(ToastService);
   auth = inject(AuthService);
+
+  private router = inject(Router);
+
+  openCandidate(applicationId: number): void {
+    this.router.navigate(['/candidates', applicationId], { queryParams: { from: 'interviews' } });
+  }
 
   items: Interview[] | null = null;
   openId: number | null = null;

@@ -40,8 +40,8 @@ a { color: var(--primary); text-decoration: none; }
 .btn:hover { background: var(--primary-dark); }
 .btn:active { transform: scale(.97); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
-.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-.btn.ghost:hover { background: var(--bg); }
+.btn.ghost { background: #fff; color: var(--text); border: 1px solid #cbd5e1; font-weight: 500; }
+.btn.ghost:hover { background: #eef2ff; border-color: var(--primary); color: var(--primary); }
 .btn.danger { background: var(--red); }
 .btn.small { padding: 4px 10px; font-size: .8rem; }
 input, select, textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font: inherit; background: #fff; }
@@ -101,4 +101,28 @@ th { color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: up
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+/* header refresh (matches the careers site) */
+.topbar .brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 10px; }
+.topbar .brand small { font-size: .74rem; font-weight: 700; color: #3730a3; background: #e0e7ff; border: 1px solid #c7d2fe; padding: 2px 10px; border-radius: 999px; letter-spacing: 0; }
+.topbar .who { display: inline-flex; align-items: center; gap: 8px; color: var(--text); font-weight: 600; }
+.topbar .who .role { font-size: .74rem; font-weight: 700; color: #3730a3; background: #eef2ff; border: 1px solid #c7d2fe; padding: 2px 10px; border-radius: 999px; }
+.topbar .logout { background: #fff; color: var(--primary); border: 1px solid #c7d2fe; font-weight: 600; padding: 7px 14px; font-size: .85rem; }
+.topbar .logout:hover { background: #eef2ff; border-color: var(--primary); }
+
+
+/* ---------- tables: consistent text and clickable rows ---------- */
+td a.row-link { color: var(--text); font-weight: 400; }
+td a.row-link:hover { color: var(--primary); text-decoration: underline; }
+tr.clickable { cursor: pointer; }
+tr.clickable:hover td { background: #f8f8fd; }
+
+/* highlights the menu item for the section a candidate page was opened from */
+body[data-section="pipeline"] .side a[href="/pipeline"],
+body[data-section="interviews"] .side a[href="/interviews"],
+body[data-section="offers"] .side a[href="/offers"] {
+  background: #eef2ff;
+  color: var(--primary);
+  font-weight: 600;
 }

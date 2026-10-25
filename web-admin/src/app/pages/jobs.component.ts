@@ -12,16 +12,19 @@ import { ToastService } from '../core/toast.service';
   standalone: true,
   imports: [FormsModule, DatePipe],
   template: `
-    <div class="row" style="align-items:center;margin-bottom:12px">
-      <h1 style="margin:0">Jobs</h1>
-      @if (auth.hasRole('Admin', 'Recruiter')) {
-        <button class="btn" style="flex:0 0 auto" (click)="newJob()">New job</button>
-      }
-    </div>
+        @if (showForm) {
+           <h1 style="margin:0 0 12px">{{ editingId ? 'Edit job' : 'New job' }}</h1>
+    } @else {
+      <div class="row" style="align-items:center;margin-bottom:12px">
+        <h1 style="margin:0">Jobs</h1>
+        @if (auth.hasRole('Admin', 'Recruiter')) {
+          <button class="btn" style="flex:0 0 auto" (click)="newJob()">New job</button>
+        }
+      </div>
+    }
 
     @if (showForm) {
       <form class="card" #f="ngForm" (ngSubmit)="save()" style="margin-bottom:16px">
-        <h2>{{ editingId ? 'Edit job' : 'New job' }}</h2>
         <div class="row">
           <div class="field"><label>Title</label><input name="title" [(ngModel)]="form.title" required maxlength="150"></div>
           <div class="field"><label>Department</label><input name="department" [(ngModel)]="form.department" required></div>
@@ -37,6 +40,7 @@ import { ToastService } from '../core/toast.service';
       </form>
     }
 
+    @if (!showForm) {
     <div class="card">
       <div class="row" style="margin-bottom:12px">
         <div><label>Search</label><input [(ngModel)]="search" (keyup.enter)="load(1)" placeholder="Title, department, location"></div>
@@ -61,7 +65,7 @@ import { ToastService } from '../core/toast.service';
             <tbody>
               @for (job of result.items; track job.id) {
                 <tr>
-                  <td><strong>{{ job.title }}</strong></td>
+                  <td>{{ job.title }}</td>
                   <td>{{ job.department }}</td>
                   <td>{{ job.location }}</td>
                   <td>{{ job.positions }}</td>
@@ -91,6 +95,7 @@ import { ToastService } from '../core/toast.service';
         </div>
       }
     </div>
+}
   `
 })
 export class JobsComponent implements OnInit {
