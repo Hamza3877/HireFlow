@@ -24,8 +24,8 @@ import { ToastService } from '../core/toast.service';
             <thead><tr><th>Candidate</th><th>Job</th><th>Salary</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
             <tbody>
               @for (o of items; track o.id) {
-                <tr class="clickable" (click)="openCandidate(o.applicationId)">
-                  <td><a class="row-link" [routerLink]="['/candidates', o.applicationId]" [queryParams]="{ from: 'offers' }" (click)="$event.stopPropagation()">{{ o.candidateName }}</a></td>
+                <tr>
+                  <td><a [routerLink]="['/candidates', o.applicationId]" [queryParams]="{ from: 'offers' }">{{ o.candidateName }}</a></td>
                   <td>{{ o.jobTitle }}</td>
                   <td>{{ o.salary }}</td>
                   <td><span class="chip" [class]="'chip ' + o.status">{{ o.status }}</span></td>
