@@ -126,3 +126,16 @@ body[data-section="offers"] .side a[href="/offers"] {
   color: var(--primary);
   font-weight: 600;
 }
+
+/* ---------- small screens: stop sideways scrolling ---------- */
+html, body { max-width: 100%; overflow-x: hidden; }
+.content { min-width: 0; }
+
+@media (max-width: 800px) {
+  .topbar { gap: 8px; padding: 0 10px; flex-wrap: nowrap; overflow: hidden; }
+  .topbar .brand { white-space: nowrap; }
+  /* on phones, hide the user name and the badges; they stay visible on bigger screens */
+  .topbar > span:not(.brand):not(.spacer) { display: none; }
+  .card { padding: 12px; }
+  .page-head { flex-wrap: wrap; }
+}
