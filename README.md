@@ -1,40 +1,5 @@
 # HireFlow – Hiring & Onboarding Platform (ASP.NET Core Web Api Microservices, SQL Server, Angular,  Next.js)
 
-A hiring and onboarding platform. Companies post jobs, candidates apply with a CV, the system gives a
-CV match score, recruiters move candidates through interview stages, and an accepted offer starts the
-onboarding checklist.
-
-HireFlow is a full-stack hiring platform a real recruitment
-
-How it works: a recruiter creates a job, a hiring manager approves it, and it appears on a public careers site. Candidates apply with a CV and get a skills match score. Recruiters move them across a Kanban board (Applied, Screening, Interview, Offer, Hired, Rejected). Interviewers submit scorecards, a manager approves the offer, the candidate accepts through a secure one-time link, and an onboarding checklist is created automatically.
-
-Roles: Admin, Recruiter and Hiring Manager, each with different permissions (JWT authentication and role-based access).
-
-Business rules I enforced and unit tested:
-• A job needs approval before it opens
-• A candidate cannot move to Offer without an interview scorecard
-• Rejecting needs a reason
-• An interviewer cannot be double-booked
-• Offer links work only once
-
-Screens: login, dashboard, jobs, Kanban pipeline, candidate profile with timeline, interviews, offers, activity log, and a public careers site with job search, apply form with CV upload, and application status page.
-
-Tech: ASP.NET Core Web API (.NET 10), Microservices, clean layers (Controller → Service → Repository), Entity Framework Core, SQL Server and SQLite, Angular, Next.js (TypeScript), xUnit, Git/GitHub, Vercel Cloud, Cloudflare Cloud .
-
-The CV match score.
-
-Live preview;- Carrier Site Live: https://hireflow-careers-fawn.vercel.app/ | Staff App Live: https://hireflow-admin-1u8.pages.dev/
-
-## Screenshots
-
-![Home](docs/screenshots/1.png)
-![Dashboard](docs/screenshots/2.png)
-![Pipeline](docs/screenshots/3.png)
-
-
-.....................
-
-# HireFlow
 
 HireFlow is a hiring and onboarding platform. A company posts a job, candidates apply with a CV, recruiters move them through interview stages, a manager approves the offer, and an accepted offer creates the new hire's onboarding checklist.
 
@@ -44,11 +9,9 @@ I built it to show a complete business flow from the first click to the first da
 
 | | Link |
 |---|---|
-| Careers site (candidates) | https://hireflow-careers-fawn.vercel.app |
-| Staff app (hiring team) | ADD-YOUR-STAFF-APP-LINK |
-| API documentation (Swagger) | ADD-YOUR-API-LINK/swagger |
+| Careers site (candidates) | https://hireflow-careers-fawn.vercel.app/ |
+| Staff app (hiring team) | https://hireflow-admin-1u8.pages.dev/ |
 
-The demo runs on free hosting, so the first page can take up to a minute to load while the server wakes up. After that it is fast.
 
 **Staff demo logins** (password for all three: `Demo@12345`)
 
@@ -62,16 +25,16 @@ The demo runs on free hosting, so the first page can take up to a minute to load
 
 ## Screenshots
 
-![Careers site home](docs/screenshots/careers-home.png)
+![Careers site home](docs/screenshots/1.png)
 *Careers site: candidates search the open jobs.*
 
 ![Apply form](docs/screenshots/apply.png)
 *Applying with a CV. The skills match is worked out as soon as the CV is uploaded.*
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/screenshots/2.png)
 *Dashboard: open jobs, applications, average days to hire, and how many candidates are in each stage.*
 
-![Pipeline board](docs/screenshots/pipeline.png)
+![Pipeline board](docs/screenshots/3.png)
 *Pipeline: drag a candidate from one stage to the next.*
 
 ![Candidate profile](docs/screenshots/candidate.png)
