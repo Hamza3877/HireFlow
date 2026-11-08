@@ -5,7 +5,6 @@ import { API_URL } from '@/lib/api';
 
 const MAX_BYTES = 5 * 1024 * 1024;
 
-// Apply form with CV upload, progress bar and clear error messages.
 export default function ApplyForm({ jobId }: { jobId: number }) {
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
@@ -38,7 +37,6 @@ export default function ApplyForm({ jobId }: { jobId: number }) {
     const form = new FormData(event.currentTarget);
     form.set('Cv', file);
 
-    // XMLHttpRequest is used (not fetch) because it can report upload progress.
     const request = new XMLHttpRequest();
     request.open('POST', `${API_URL}/api/public/jobs/${jobId}/apply`);
     request.upload.onprogress = e => e.lengthComputable && setProgress(Math.round((e.loaded / e.total) * 100));

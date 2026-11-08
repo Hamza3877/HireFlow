@@ -5,7 +5,6 @@ import { API_URL, StatusResult, readError } from '@/lib/api';
 
 const STAGES = ['Applied', 'Screening', 'Interview', 'Offer', 'Hired'];
 
-// Candidate enters email + application code and sees where their application is.
 export default function StatusPage() {
   const [result, setResult] = useState<StatusResult | null>(null);
   const [error, setError] = useState('');

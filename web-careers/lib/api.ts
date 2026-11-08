@@ -1,4 +1,3 @@
-// Talks to the HireFlow public API. The address comes from NEXT_PUBLIC_API_URL.
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
 
 export interface Job {
@@ -31,7 +30,6 @@ export interface PublicOffer {
   status: string;
 }
 
-// Turns an API error body (ProblemDetails) into a short message for the user.
 export async function readError(response: Response): Promise<string> {
   try {
     const body = await response.json();

@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { getOpenJobs } from '@/lib/api';
 
-
-
 const paths = {
   bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7z" />,
   bell: <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0" />,
@@ -34,7 +32,6 @@ const PERKS: { icon: IconName; t: string; d: string }[] = [
 
 const STAGES = ['Applied', 'Screening', 'Interview', 'Offer', 'Hired'];
 
-// Careers home: hero, search box and the list of open jobs (loaded on the server).
 export default async function Home({ searchParams }: { searchParams: { q?: string } }) {
   const search = searchParams.q?.trim() ?? '';
     const [jobs, all] = await Promise.all([getOpenJobs(search), search ? getOpenJobs('') : null]);

@@ -1,6 +1,5 @@
 'use client';
 
-// Shown when the page cannot load (for example the API is asleep or offline).
 export default function ErrorPage({ reset }: { error: Error; reset: () => void }) {
   return (
     <div className="card">
