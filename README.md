@@ -3,7 +3,7 @@
 
 HireFlow is a hiring and onboarding platform. A company posts a job, candidates apply with a CV, recruiters move them through interview stages, a manager approves the offer, and an accepted offer creates the new hire's onboarding checklist.
 
-I built it to show a complete business flow from the first click to the first day at work, not just a list of pages. It has a public careers site for candidates and a staff app for the hiring team, both talking to one API.
+I built it to show a complete business flow from the first click to the first day at work. It has a public careers site for candidates and a staff app for the hiring team, both talking to one API.
 
 **Live demo**
 
@@ -28,23 +28,41 @@ I built it to show a complete business flow from the first click to the first da
 ![Careers site home](docs/screenshots/1.png)
 *Careers site: candidates search the open jobs.*
 
-![Apply form](docs/screenshots/apply.png)
-*Applying with a CV. The skills match is worked out as soon as the CV is uploaded.*
+![Apply form](docs/screenshots/jobdetail.png)
+*Job Detail and Applying with a CV. The skills match is worked out as soon as the CV is uploaded.*
 
 ![Dashboard](docs/screenshots/2.png)
 *Dashboard: open jobs, applications, average days to hire, and how many candidates are in each stage.*
 
+![Job](docs/screenshots/jobpage.png)
+*Job Page.*
+
+![New Job](docs/screenshots/newjob.png)
+*New Job Page.*
+
+
 ![Pipeline board](docs/screenshots/3.png)
 *Pipeline: drag a candidate from one stage to the next.*
 
-![Candidate profile](docs/screenshots/candidate.png)
-*Candidate profile: CV, match score, interviews, offer, onboarding and the full timeline.*
+![Pipeline detail](docs/screenshots/pipelinedetail.png)
+*Pipeline Detail: Candidate profile: CV, match score, interviews, offer, onboarding and the full timeline.*
 
-![Interviews](docs/screenshots/interviews.png)
+![Interviews](docs/screenshots/interview.png)
 *Interviews and scorecards.*
 
-![Offers](docs/screenshots/offers.png)
+![Offers](docs/screenshots/offer.png)
 *Offers waiting for approval.*
+
+![Admin Activity Log](docs/screenshots/adminactivitylog.png)
+*Admin Activity Log.*
+
+![Offer Ask Screen](docs/screenshots/jobofferasking.png)
+*Offer Ask Screen.*
+
+![Offer Accept Screen](docs/screenshots/jobaccept.png)
+*Offer Accept Screen.*
+
+
 
 ---
 
@@ -149,51 +167,6 @@ web-admin                    Angular staff app
 web-careers                  Next.js careers site
 ```
 
-A request goes **Controller, then Service, then Repository**. Controllers only pass data along, services hold the rules, and repositories only talk to the database. Each has an interface, so the rules can be tested without a database. Dependencies point inward: the Domain project knows nothing about the others.
-
-A few choices worth explaining:
-
-- **One API plus one separate service,** not many microservices. For an app this size a single API is the sensible start. The Notifications service shows how a part can be split out, and if it is down the main action still succeeds.
-- **Specific repositories** (jobs, candidates, applications and so on) instead of one generic repository, because they are easier to read.
-- **The match score is rule-based.** It counts how many required skills appear in the CV text. It is simple and easy to explain, and it sits behind an interface so a smarter model could replace it later.
-- **No MediatR, AutoMapper or other paid-licence libraries.** Mapping is written by hand.
-
----
-
-## Run it on your computer
-
-You need the .NET 10 SDK and Node.js (LTS). The easiest start uses SQLite, so no database install is needed.
-
-**1. API** (http://localhost:5000/swagger)
-```
-cd src/HireFlow.Api
-dotnet run --Database:Provider=Sqlite
-```
-
-**2. Staff app** (http://localhost:4200)
-```
-cd web-admin
-npm install
-npm start
-```
-
-**3. Careers site** (http://localhost:3000)
-```
-cd web-careers
-npm install
-npm run dev
-```
-
-The first start creates the database and fills it with demo data: three staff users, six jobs and forty candidates spread across the stages.
-
-**To use SQL Server instead** (for example to look at the tables in SSMS), put your connection string in `src/HireFlow.Api/appsettings.json` under `ConnectionStrings:SqlServer` and run `dotnet run` without the SQLite option. The tables are created on first start. `docker compose up` also works if you have Docker.
-
-**Tests**
-```
-dotnet test
-```
-
----
 
 ## Security
 
@@ -206,10 +179,6 @@ dotnet test
 
 ---
 
-## What it does not do yet
-
-- **No real emails.** The Notifications service records messages but does not send them, so the recruiter copies the offer link and sends it by hand.
-- **Free hosting sleeps.** The demo server stops when idle, and the demo data may reset when it restarts.
 - **No file storage in the cloud.** CVs are saved on the server's disk.
 
 If I kept working on it, the next steps would be sending real emails, calendar invites for interviews, and cloud file storage.
