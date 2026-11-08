@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { API_URL, PublicOffer, readError } from '@/lib/api';
 
-// The candidate opens the secret link from the email and accepts or declines the offer.
 export default function OfferPage({ params }: { params: { token: string } }) {
   const [offer, setOffer] = useState<PublicOffer | null>(null);
   const [error, setError] = useState('');

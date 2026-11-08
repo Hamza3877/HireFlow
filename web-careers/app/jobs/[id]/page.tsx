@@ -6,7 +6,6 @@ import ApplyForm from './ApplyForm';
 
 type Props = { params: { id: string } };
 
-// Page title and description for search engines, created on the server for each job.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const job = await getOpenJob(params.id);
   return job
