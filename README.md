@@ -53,7 +53,7 @@ I built it to show a complete business flow from the first click to the first da
 ![Offers](docs/screenshots/offer.png)
 *Offers waiting for approval.*
 
-![Admin Activity Log](docs/screenshots/adminactivitylog.png)
+![Admin Activity Log](docs/screenshots/adminactivtylog.png)
 *Admin Activity Log.*
 
 ![Offer Ask Screen](docs/screenshots/jobofferasking.png)
@@ -179,6 +179,3 @@ web-careers                  Next.js careers site
 
 ---
 
-- **No file storage in the cloud.** CVs are saved on the server's disk.
-
-If I kept working on it, the next steps would be sending real emails, calendar invites for interviews, and cloud file storage.
